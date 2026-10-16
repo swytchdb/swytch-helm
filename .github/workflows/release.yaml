@@ -1,0 +1,49 @@
+name: Publish OCI chart
+on:
+  push:
+    tags: ['v*']
+permissions:
+  contents: read
+concurrency:
+  group: chart-release-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  test:
+    uses: ./.github/workflows/test.yaml
+  publish:
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/setup-helm@v4.3.0
+        with:
+          version: v3.17.3
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python3 -m pip install 'PyYAML>=6,<7'
+      - name: Validate release tag and package
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          python3 scripts/check-chart.py "$RELEASE_TAG"
+          helm package charts/swytch-operator --destination dist
+      - name: Authenticate to GHCR
+        env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: printf '%s' "$GHCR_TOKEN" | helm registry login ghcr.io --username "$GITHUB_ACTOR" --password-stdin
+      - name: Publish and verify OCI package
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          version="${RELEASE_TAG#v}"
+          helm push "dist/swytch-operator-$version.tgz" oci://ghcr.io/swytchdb/charts
+          mkdir -p dist/verify
+          helm pull oci://ghcr.io/swytchdb/charts/swytch-operator --version "$version" --destination dist/verify
+          cmp "dist/swytch-operator-$version.tgz" "dist/verify/swytch-operator-$version.tgz"
+      - name: Log out of GHCR
+        if: always()
+        run: helm registry logout ghcr.io

@@ -1,0 +1,30 @@
+apiVersion: v2
+name: swytch-operator
+description: Swytch Redis sidecar injection and server deployments
+type: application
+version: 1.5.2
+appVersion: "1.5.2"
+kubeVersion: ">=1.33.0-0"
+home: https://getswytch.com
+icon: https://raw.githubusercontent.com/swytchdb/swytch-helm/main/assets/swytch.png
+sources:
+  - https://github.com/swytchdb/swytch-helm
+  - https://github.com/swytchdb/swytch/tree/main/operator
+keywords:
+  - swytch
+  - redis
+  - cache
+  - operator
+  - sidecar
+maintainers:
+  - name: Swytch
+    email: hello@getswytch.com
+    url: https://github.com/swytchdb
+annotations:
+  artifacthub.io/license: AGPL-3.0-or-later
+  artifacthub.io/operator: "true"
+  artifacthub.io/links: |
+    - name: Documentation
+      url: https://docs.getswytch.com/start/kubernetes/
+    - name: Source
+      url: https://github.com/swytchdb/swytch-helm

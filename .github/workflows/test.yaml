@@ -1,0 +1,47 @@
+name: Test chart
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  workflow_call:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/setup-helm@v4.3.0
+        with:
+          version: v3.17.3
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python3 -m pip install 'PyYAML>=6,<7'
+      - run: python3 scripts/check-chart.py
+      - name: Verify published image manifests
+        run: |
+          app_version=$(python3 -c 'import yaml; print(yaml.safe_load(open("charts/swytch-operator/Chart.yaml"))["appVersion"])')
+          docker buildx imagetools inspect "ghcr.io/swytchdb/swytch-operator:$app_version"
+          docker buildx imagetools inspect "ghcr.io/swytchdb/swytch:$app_version"
+  smoke:
+    needs: validate
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['v1.33.1', 'v1.35.0']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/setup-helm@v4.3.0
+        with:
+          version: v3.17.3
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.25'
+          cache: false
+      - run: go install sigs.k8s.io/kind@v0.31.0
+      - run: bash tests/smoke.sh
+        env:
+          KIND_NODE_IMAGE: kindest/node:${{ matrix.node }}
