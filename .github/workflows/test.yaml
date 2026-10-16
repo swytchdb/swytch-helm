@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: azure/setup-helm@v4.3.0
+      - uses: azure/setup-helm@v5.0.1
         with:
           version: v3.17.3
       - uses: actions/setup-python@v7
@@ -34,7 +34,7 @@ jobs:
         node: ['v1.33.1', 'v1.35.0']
     steps:
       - uses: actions/checkout@v7
-      - uses: azure/setup-helm@v4.3.0
+      - uses: azure/setup-helm@v5.0.1
         with:
           version: v3.17.3
       - uses: actions/setup-go@v7
