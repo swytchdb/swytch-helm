@@ -5,7 +5,7 @@ image:
   pullPolicy: IfNotPresent
 imagePullSecrets: []
 swytch:
-  image: ghcr.io/swytchdb/swytch:1.5.2
+  image: ghcr.io/swytchdb/swytch:1.6.0
   # These Secrets must exist in each workload namespace.
   imagePullSecrets: []
 resources:

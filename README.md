@@ -4,9 +4,9 @@ Helm charts for [Swytch](https://github.com/swytchdb/swytch), a Redis-compatible
 distributed cache. Operator code stays in the Swytch repository. This repository
 owns the chart, its CRD manifest, packaging, and chart releases.
 
-| Chart | Chart version | Operator / default Swytch version | Kubernetes |
-| --- | --- | --- | --- |
-| [swytch-operator](charts/swytch-operator) | 1.5.2 | 1.5.2 | 1.33+ |
+| Chart                                     | Chart version | Operator / default Swytch version | Kubernetes |
+|-------------------------------------------|---------------|-----------------------------------|------------|
+| [swytch-operator](charts/swytch-operator) | 1.6.0         | 1.6.0                             | 1.33+      |
 
 ## Install from OCI
 
