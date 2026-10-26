@@ -93,6 +93,9 @@ spec:
                   type: string
                   minLength: 1
                   maxLength: 512
+                ssi:
+                  type: boolean
+                  description: Return immediate MULTI results from an SSI snapshot and commit at EXEC. Disabled by default.
                 sidecar:
                   type: object
                   properties:

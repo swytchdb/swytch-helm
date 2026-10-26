@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.6.0
+- Enable SSI mode for Swytch 1.6.0
+
 ## 1.5.2
 
 - Move the chart from `swytchdb/swytch` into its own repository, preserving its
