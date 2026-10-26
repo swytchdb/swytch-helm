@@ -12,7 +12,7 @@ owns the chart, its CRD manifest, packaging, and chart releases.
 
 ```sh
 helm install swytch oci://ghcr.io/swytchdb/charts/swytch-operator \
-  --version 1.5.2 --namespace swytch-system --create-namespace --wait
+  --version 1.6.0 --namespace swytch-system --create-namespace --wait
 ```
 
 Helm 3.8+ supports OCI without an experimental flag. No `helm repo add` is needed.
@@ -30,15 +30,15 @@ Review release notes and your existing values before upgrading. Helm does not
 upgrade CRDs from `crds/`. Fetch the exact target chart and apply its CRD first:
 
 ```sh
-chart_version=1.5.2
+chart_version=1.6.0
 chart_dir="$(mktemp -d)"
 helm pull oci://ghcr.io/swytchdb/charts/swytch-operator \
   --version "$chart_version" --untar --untardir "$chart_dir"
 kubectl apply -f "$chart_dir/swytch-operator/crds/"
 helm upgrade swytch "$chart_dir/swytch-operator" \
   --namespace swytch-system --reuse-values \
-  --set-string image.tag=1.5.2 \
-  --set-string swytch.image=ghcr.io/swytchdb/swytch:1.5.2 --wait
+  --set-string image.tag=1.6.0 \
+  --set-string swytch.image=ghcr.io/swytchdb/swytch:1.6.0 --wait
 ```
 
 `--reuse-values` retains old values, including image pins. The explicit image
@@ -59,7 +59,7 @@ the **currently installed chart version**:
 
 ```sh
 helm upgrade swytch oci://ghcr.io/swytchdb/charts/swytch-operator \
-  --version 1.5.2 --namespace swytch-system --reuse-values \
+  --version 1.6.0 --namespace swytch-system --reuse-values \
   --set-string webhook.certificateRevision=2 --wait
 ```
 
