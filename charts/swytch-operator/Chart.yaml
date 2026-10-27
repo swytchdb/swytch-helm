@@ -2,8 +2,8 @@ apiVersion: v2
 name: swytch-operator
 description: Swytch Redis sidecar injection and server deployments
 type: application
-version: 1.6.0
-appVersion: "1.6.0"
+version: 1.6.1
+appVersion: "1.6.1"
 kubeVersion: ">=1.33.0-0"
 home: https://getswytch.com
 icon: https://raw.githubusercontent.com/swytchdb/swytch-helm/main/assets/swytch.png
