@@ -5,17 +5,17 @@ Inject native Redis sidecars or reconcile server Deployments from namespaced
 
 ```sh
 helm install swytch oci://ghcr.io/swytchdb/charts/swytch-operator \
-  --version 1.6.0 --namespace swytch-system --create-namespace --wait
+  --version 1.6.1 --namespace swytch-system --create-namespace --wait
 ```
 
 | Value                             | Default                            | Purpose                                                        |
 |-----------------------------------|------------------------------------|----------------------------------------------------------------|
 | `replicaCount`                    | `1`                                | Operator replicas; leader election is enabled.                 |
 | `image.repository`                | `ghcr.io/swytchdb/swytch-operator` | Operator image repository.                                     |
-| `image.tag`                       | `1.6.0`                            | Operator image tag.                                            |
+| `image.tag`                       | `1.6.1`                            | Operator image tag.                                            |
 | `image.pullPolicy`                | `IfNotPresent`                     | Operator image pull policy.                                    |
 | `imagePullSecrets`                | `[]`                               | Operator registry Secrets as `{name: ...}` objects.            |
-| `swytch.image`                    | `ghcr.io/swytchdb/swytch:1.6.0`    | Default image for generated workloads.                         |
+| `swytch.image`                    | `ghcr.io/swytchdb/swytch:1.6.1`    | Default image for generated workloads.                         |
 | `swytch.imagePullSecrets`         | `[]`                               | Secret names; must exist in each workload namespace.           |
 | `resources`                       | Memory limit `128Mi`               | Operator resources; requests are omitted.                      |
 | `nodeSelector` / `affinity`       | `{}`                               | Operator scheduling constraints.                               |
