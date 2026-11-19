@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.7.0
+
+- Update the operator and default Swytch images to 1.7.0.
+
 ## 1.6.0
 - Enable SSI mode for Swytch 1.6.0
 
