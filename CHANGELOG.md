@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.7.1
+
+- Update the operator and default Swytch images to 1.7.1.
+
 ## 1.7.0
 
 - Update the operator and default Swytch images to 1.7.0.
