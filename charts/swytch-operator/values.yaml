@@ -1,11 +1,11 @@
 replicaCount: 1
 image:
   repository: ghcr.io/swytchdb/swytch-operator
-  tag: "1.7.0"
+  tag: "1.7.1"
   pullPolicy: IfNotPresent
 imagePullSecrets: []
 swytch:
-  image: ghcr.io/swytchdb/swytch:1.7.0
+  image: ghcr.io/swytchdb/swytch:1.7.1
   # These Secrets must exist in each workload namespace.
   imagePullSecrets: []
 resources:
